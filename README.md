@@ -1,2 +1,2 @@
 # PhyCom_Lab
-Physical computing 68 at IT KMITL
+Physical computing IT@KMITL Year2 Semester1
