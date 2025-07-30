@@ -1,23 +1,34 @@
-#include "stdio.h"
-
+#include <stdio.h>
+ 
 int main() {
-	char t;
-
-	scanf("%c", &t);
-
-	switch (t) {
-		case 'A' | 'a': printf("Genius");
-				  break;
-		case 'B' | 'b': printf("Good");
-				  break;
-		case 'C' | 'c': printf("Try Harder");
-				  break;
-		case 'D' | 'd': printf("Very Bad");
-				  break;
-		case 'F' | 'f': printf("Fail");
-				  break;
-		default: printf("Invalid Input");
-	}
-
-	return 0;
+    char t;
+ 
+    scanf("%c", &t);
+ 
+    if ( (int) t > 90 ){
+            t = (char) ( ( (int) t ) - 32 );
+ 
+    }
+ 
+    switch (t)
+    {
+    case 'A':
+        printf("Genius");
+        break;
+    case 'B':
+        printf("Good");
+        break;
+    case 'C':
+        printf("Try Harder");
+        break;
+    case 'D':
+        printf("Very Bad");
+        break;
+    case 'F':
+        printf("Fail");
+        break;
+    default:
+        printf("Invalid Input");
+    }
+    return 0;
 }
