@@ -1,17 +1,54 @@
-// #include <stdio.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
 
-// void len_str(char* t) {
-//   int n = 0;
-//   while (t[n] != '\0') n++;
-//   return n;
-// }
+#define SHIFT 5
+#define ALPHABET_LEN 26
 
-// int main() {
-//   char en[201];
+int find_index(char c, const char *text) {
+    for (int i = 0; i < ALPHABET_LEN; i++) {
+        if (text[i] == c) return i;
+    }
+    return -1;
+}
 
-//   scanf("%[^\n]", en);
+int main() {
+    char sentences[201];
+    const char text[] = "aiwgzvfuthsojlkdecnmrqpyxb";
 
-//   for (int i = 0; i < len_str(en); i++) {
-//     if (en[i] != ' ') {printf("%c", en[i] + 5);}
-//   }
-// }
+    scanf("%[^\n]", sentences);
+
+    int i = 0;
+    while (sentences[i] != '\0') {
+
+        char ch = sentences[i];
+        if (ch == ' ') {
+            printf(" ");
+            i++;
+            continue;
+        }
+
+        if (!isalpha(ch)) {
+            i++;
+            continue;
+        }
+
+        char lower = tolower(ch);
+        int idx = find_index(lower, text);
+        if (idx == -1) {
+            i++;
+            continue;
+        }
+
+        int enc_idx = (idx + SHIFT) % ALPHABET_LEN;
+        char enc_char = text[enc_idx];
+
+        if (isupper(ch))
+            printf("%c", toupper(enc_char));
+        else
+            printf("%c", enc_char);
+
+        i++;
+    }
+    return 0;
+}
