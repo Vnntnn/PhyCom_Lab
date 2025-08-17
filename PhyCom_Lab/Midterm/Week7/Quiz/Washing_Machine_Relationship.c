@@ -1,17 +1,23 @@
 #include <stdio.h>
 
-
 int main() {
-  int round;
+  long int games;
+  scanf("%ld", &games);
 
-  scanf("%d", &round);
+  double blood = 2800.0;
+  double total_lost = 0.0;
+  double hours = (games * 30.0) / 60.0;
 
-  double b_drop = ((double) round / 2) * ((2.0 / 100) * 2800);
-  printf("%.2lf\n", b_drop);
+  int full_hours = (int) hours;
+  double remain_minutes = (hours - full_hours) * 60.0;
 
-  if (b_drop > (2800 * (30.0 / 100))) { printf("Danger"); }
-  else { printf("Safe"); }
+  for (int i = 0; i < full_hours; i++) {
+    total_lost += blood * 0.02;
+    blood -= blood * 0.02;
+  }
+
+  printf("%.2lf\n", total_lost);
+  (total_lost > 2800.0 * 0.3) ? printf("Danger") : printf("Safe");
 
   return 0;
-
 }

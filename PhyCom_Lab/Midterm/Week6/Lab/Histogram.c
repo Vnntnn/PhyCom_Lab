@@ -16,37 +16,6 @@ int linear_search(char arr[], int n, char c) {
   return -1;
 }
 
-int binary_search(char arr[], int n, char c) {
-  int left = 0, right = n - 1;
-  while (left <= right) {
-    int mid = (left + right) / 2;
-    if (arr[mid] == c) {
-      return mid;
-    }
-
-    else if (arr[mid] < c) {
-      left = mid + 1;
-    }
-
-    else {
-      right = mid - 1;
-    }
-  }
-  return -1;
-}
-
-void sort_char(char *arr, int n) {
-  for (int i = 0; i < n - 1; i++) {
-    for (int j = i + 1; j < n; j++) {
-      if (arr[i] > arr[j]) {
-        char temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-      }
-    }
-  }
-}
-
 int main() {
   int num;
   scanf("%d", &num);
