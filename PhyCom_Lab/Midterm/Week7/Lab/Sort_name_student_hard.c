@@ -42,48 +42,32 @@ void str_cpy(char* og, char* nw) {
   og[i] = '\0';
 }
 
-void merge(char arr[][61], int l, int m, int r) {
-  int n1 = m - l + 1;
-  int n2 = r - m;
-
-  char L[n1][61], R[n2][61];
-
-  for (int i = 0; i < n1; i++)
-    str_cpy(L[i], arr[l + i]);
-  for (int j = 0; j < n2; j++)
-    str_cpy(R[j], arr[m + 1 + j]);
-
-  int i = 0, j = 0, k = l;
-  while (i < n1 && j < n2) {
-    if (str_cmp(L[i], R[j]) <= 0) {
-      str_cpy(arr[k], L[i]);
-      i++;
-    } else {
-      str_cpy(arr[k], R[j]);
-      j++;
-    }
-    k++;
-  }
-
-  while (i < n1) {
-    str_cpy(arr[k], L[i]);
-    i++;
-    k++;
-  }
-
-  while (j < n2) {
-    str_cpy(arr[k], R[j]);
-    j++;
-    k++;
-  }
+void swap(char a[61], char b[61]) {
+  char temp[61];
+  str_cpy(temp, a);
+  str_cpy(a, b);
+  str_cpy(b, temp);
 }
 
-void merge_sort(char arr[][61], int l, int r) {
-  if (l < r) {
-    int m = l + (r - l) / 2;
-    merge_sort(arr, l, m);
-    merge_sort(arr, m + 1, r);
-    merge(arr, l, m, r);
+int partition(char arr[][61], int low, int high) {
+  char pivot[61];
+  str_cpy(pivot, arr[high]);
+  int i = low - 1;
+  for (int j = low; j < high; j++) {
+    if (str_cmp(arr[j], pivot) <= 0) {
+      i++;
+      swap(arr[i], arr[j]);
+    }
+  }
+  swap(arr[i + 1], arr[high]);
+  return i + 1;
+}
+
+void quick_sort(char arr[][61], int low, int high) {
+  if (low < high) {
+    int pi = partition(arr, low, high);
+    quick_sort(arr, low, pi - 1);
+    quick_sort(arr, pi + 1, high);
   }
 }
 
@@ -111,7 +95,7 @@ int main() {
     }
   }
 
-  merge_sort(students, 0, n - 1);
+  quick_sort(students, 0, n - 1);
 
   for (int i = 0; i < n; i++) {
     printf("%s\n", students[i]);
